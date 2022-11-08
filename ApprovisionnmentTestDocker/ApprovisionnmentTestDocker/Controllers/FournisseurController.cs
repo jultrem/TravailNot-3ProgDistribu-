@@ -15,7 +15,7 @@ namespace ApprovisionnmentTestDocker.Controllers
 
         public fournisseurController()
         {
-            _connection = new MySqlConnection("server=localhost;user id=root;password=toor;database=fleuron");
+            _connection = new MySqlConnection("server=host.docker.internal;Uid=root;password=toor;Database=fleuron");
             _connection.Open();
         }
 
@@ -23,45 +23,29 @@ namespace ApprovisionnmentTestDocker.Controllers
         [HttpGet(Name = "GetFournisseurs")]
         public IEnumerable<Fournisseurs> Get([FromQuery(Name = "id")] int id)
         {
-            var retour = Enumerable.Empty<Fournisseurs>();
-
+            var req = _connection.CreateCommand();
             if (HttpContext.Request.Query.TryGetValue("id", out var queryVal))
             {
                 int idQuery = Int32.Parse(queryVal);
-                var req = _connection.CreateCommand();
                 req.CommandText = "SELECT f.FournisseurID, f.Nom FROM fournisseurs as f INNER JOIN fournisseurs_sites as fs ON f.FournisseurID = fs.FournisseurID WHERE fs.SiteID = @id";
                 req.Parameters.AddWithValue("id", idQuery);
-                var reader = req.ExecuteReader();
-                var liste = new List<Fournisseurs>();
-                while (reader.Read())
-                {
-                    var f = new Fournisseurs
-                    {
-                        id = reader.GetInt32("FournisseurID"),
-                        fournisseurs = reader.GetString("Nom")
-                    };
-                    liste.Add(f);
-                }
-                retour = liste;
             }
             else
             {
-                var req = _connection.CreateCommand();
                 req.CommandText = "SELECT FournisseurID, Nom FROM fournisseurs";
-                var reader = req.ExecuteReader();
-                var liste = new List<Fournisseurs>();
-                while (reader.Read())
-                {
-                    var f = new Fournisseurs
-                    {
-                        id = reader.GetInt32("FournisseurID"),
-                        fournisseurs = reader.GetString("Nom")
-                    };
-                    liste.Add(f);
-                }
-                retour = liste;
             }
-            return retour;
+            var reader = req.ExecuteReader();
+            var liste = new List<Fournisseurs>();
+            while (reader.Read())
+            {
+                var f = new Fournisseurs
+                {
+                    id = reader.GetInt32("FournisseurID"),
+                    fournisseurs = reader.GetString("Nom")
+                };
+                liste.Add(f);
+            }
+            return liste;
         }
     }
 }

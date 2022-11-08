@@ -23,7 +23,7 @@ namespace ApprovisionnmentTestDocker.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
