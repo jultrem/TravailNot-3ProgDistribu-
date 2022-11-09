@@ -8,12 +8,12 @@ namespace ApprovisionnmentTestDocker.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class fournisseurController : ControllerBase
+    public class fournisseursController : ControllerBase
     {
 
         private readonly MySqlConnection _connection;
 
-        public fournisseurController()
+        public fournisseursController()
         {
             _connection = new MySqlConnection("server=host.docker.internal;Uid=root;password=toor;Database=fleuron");
             _connection.Open();
