@@ -31,11 +31,18 @@ services:
     build: production/
     depends_on:
       - mariadb
+    environment:
+      PORT: 8510
+      PATH: /production1/
+
 
   production2:
     build: production/
     depends_on:
       - mariadb
+    environment:
+      PORT: 8511
+      PATH: /production2/
 
   approvisionnement:
     build: ApprovisionnmentTestDocker/

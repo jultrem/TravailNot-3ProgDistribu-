@@ -1,15 +1,12 @@
 from typing import List
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
+import uvicorn
 import mariadb
-
+import os
 import sys
 
-#app = FastAPI(openapi_url=None)
 
-# Connect to MariaDB Platform
 try:
     conn = mariadb.connect(
         user="root",
@@ -22,14 +19,10 @@ except mariadb.Error as e:
     print(f"Zut, Error connecting to MariaDB Platform: {e}")
     sys.exit(1)
 
-# Get Cursor
 cursor = conn.cursor()
 
-app = FastAPI(servers=[
-    {"url": "http://production1/", "description": "production1"},
-    {"url": "http://production2/", "description": "production2"}
-])
-
+path = os.environ.get('PATH')
+app = FastAPI(root_path=path)
 
 class SiteBD(BaseModel):
     id: int
