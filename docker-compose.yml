@@ -1,14 +1,13 @@
 version: "3.8"
 
 services:
-
   mariadb:
     image: mariadb:latest
     volumes:
        - data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: domestique
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: fleuron
       MYSQL_USER: root
 
   nginx:
@@ -21,14 +20,20 @@ services:
       - paie
       - production1
       - production2
+      - approvisionnement
 
   paie:
-    build: Budget/
+    build: Paie/
     depends_on:
       - mariadb
 
-  tache:
-    build: taches_python/
+  Production:
+    build: Production/
+    depends_on:
+      - mariadb
+
+  apprivisionnement:
+    build: ApprovisionnementTestDocker/
     depends_on:
       - mariadb
 
