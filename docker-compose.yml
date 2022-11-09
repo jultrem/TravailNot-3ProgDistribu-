@@ -23,17 +23,22 @@ services:
       - approvisionnement
 
   paie:
-    build: Paie/
+    build: paie/
     depends_on:
       - mariadb
 
-  Production:
-    build: Production/
+  production1:
+    build: production/
     depends_on:
       - mariadb
 
-  apprivisionnement:
-    build: ApprovisionnementTestDocker/
+  production2:
+    build: production/
+    depends_on:
+      - mariadb
+
+  approvisionnement:
+    build: ApprovisionnmentTestDocker/
     depends_on:
       - mariadb
 

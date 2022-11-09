@@ -14,8 +14,7 @@ try:
     conn = mariadb.connect(
         user="root",
         password="toor",
-        host="host.docker.internal",
-        #host="localhost",
+        host="mariadb",
         port=3306,
         database="fleuron"
     )
@@ -26,7 +25,10 @@ except mariadb.Error as e:
 # Get Cursor
 cursor = conn.cursor()
 
-app = FastAPI(root_path="/production/")
+app = FastAPI(servers=[
+    {"url": "http://production1/", "description": "production1"},
+    {"url": "http://production2/", "description": "production2"}
+])
 
 
 class SiteBD(BaseModel):

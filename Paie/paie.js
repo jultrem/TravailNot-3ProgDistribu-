@@ -3,7 +3,7 @@ const mariadb = require('mariadb');
 const app = express()
 const port = 3000
 const pool = mariadb.createPool({
-    host: 'host.docker.internal', 
+    host: 'mariadb', 
     user:'root', 
     password: 'toor',
     database: 'fleuron'

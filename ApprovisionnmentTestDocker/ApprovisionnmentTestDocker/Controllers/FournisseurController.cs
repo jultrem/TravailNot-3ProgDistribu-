@@ -15,7 +15,7 @@ namespace ApprovisionnmentTestDocker.Controllers
 
         public fournisseurController()
         {
-            _connection = new MySqlConnection("server=host.docker.internal;Uid=root;password=toor;Database=fleuron");
+            _connection = new MySqlConnection("server=mariadb;Uid=root;password=toor;Database=fleuron");
             _connection.Open();
         }
 
