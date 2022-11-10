@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY *.py /code/
 
-CMD uvicorn main:app --proxy-headers --host 0.0.0.0 --port ${PORT}
+ENTRYPOINT uvicorn app.main:app --host 0.0.0.0 --port ${PORT}
