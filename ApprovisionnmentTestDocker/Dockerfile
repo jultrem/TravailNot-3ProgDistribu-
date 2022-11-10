@@ -16,4 +16,4 @@ RUN dotnet publish -c release -o /app --no-cache
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "ApprovisionnmentTestDocker.dll", "--urls", "http://+:8503"]
+ENTRYPOINT ["dotnet", "ApprovisionnmentTestDocker.dll", "--urls", "http://+:8502"]

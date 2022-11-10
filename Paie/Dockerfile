@@ -1,7 +1,6 @@
-FROM node:14
+FROM node:7.7.2-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install 
-COPY ./paie.js /app/
-EXPOSE 8501
+COPY package*.json .
+RUN npm install --quiet
+COPY . .
 CMD ["node", "paie.js"]

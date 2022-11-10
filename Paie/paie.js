@@ -9,7 +9,7 @@ const pool = mariadb.createPool({
     database: 'fleuron'
 });
 
-app.get('/paye/talons', async (req, res) => {
+app.get('paye/talons', async (req, res) => {
   if (req.query.employe)
     row = await listerTalonsParEmploye(req.query.employe)
   else

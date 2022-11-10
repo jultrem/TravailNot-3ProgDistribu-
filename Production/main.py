@@ -32,11 +32,11 @@ class projetBD(BaseModel):
     nom_site: str
     site_id: int
 
-@app.get("/production/")
+@app.get("/")
 def root():
     return {"message": "Bienvenue sur Fleuron insdustrie"}
 
-@app.get("/production/sites", response_model=List[SiteBD])
+@app.get("production/sites", response_model=List[SiteBD])
 def recuperer_sites():
     cursor.execute("SELECT SiteID, Nom FROM sites")
     tuples_projet = cursor.fetchall()
@@ -44,7 +44,7 @@ def recuperer_sites():
     return projets
 
 
-@app.get("/production/sites/{id_site}/projets", response_model=List[projetBD])
+@app.get("production/sites/{id_site}/projets", response_model=List[projetBD])
 def recuperer_projes_en_fonction_de_site(id_site: int):
     cursor.execute("SELECT SiteID, Nom, ProjetID FROM projets WHERE SiteID = ?", (id_site,))
     tuples_projet = cursor.fetchall()               
