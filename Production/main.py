@@ -1,7 +1,6 @@
 from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import uvicorn
 import mariadb
 import os
 import sys
@@ -21,8 +20,8 @@ except mariadb.Error as e:
 
 cursor = conn.cursor()
 
-path = os.environ.get('PATH')
-app = FastAPI(root_path=path)
+#path = os.environ.get("PATH")
+app = FastAPI(root_path="/production/")
 
 class SiteBD(BaseModel):
     id: int
